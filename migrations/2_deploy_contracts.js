@@ -1,6 +1,5 @@
-//var product = artifacts.require("TheProduct");
-var product = artifacts.require("TheProductV2");
+const TescoExpiryTracker = artifacts.require("TescoExpiryTracker");
 
 module.exports = function(deployer) {
-    deployer.deploy(product);
+  deployer.deploy(TescoExpiryTracker);
 };

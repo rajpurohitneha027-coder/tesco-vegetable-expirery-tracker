@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alerts — Tesco Vegetable Expiry Tracker</title>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<%- include('partials/navbar', { page: 'alerts' }) %>
+<main class="main-content">
+  <div class="page-header">
+    <div>
+      <h1>🔔 Stock Alerts</h1>
+      <p>Blockchain-generated alerts for expiring and recalled products</p>
+    </div>
+    <button class="btn-secondary" onclick="loadAlerts()">↻ Refresh</button>
+  </div>
+  <div id="alertsList" class="alerts-list">
+    <div class="loading-state">Loading alerts from blockchain…</div>
+  </div>
+</main>
+<%- include('partials/footer') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+<script src="/js/web3-utils.js"></script>
+<script src="/js/alerts.js"></script>
+</body>
+</html>

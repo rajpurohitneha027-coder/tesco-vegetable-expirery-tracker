@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-brand-icon">🛒</div>
+    <div>
+      <div class="brand-name">Tesco Vegetable Expiry Tracker</div>
+      <div class="brand-sub">Blockchain Supply Chain System</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="/" class="nav-link <%= page==='dashboard'?'active':'' %>">📊 Dashboard</a>
+    <a href="/add" class="nav-link <%= page==='add'?'active':'' %>">➕ Add Product</a>
+    <a href="/ledger" class="nav-link <%= page==='ledger'?'active':'' %>">📋 Ledger</a>
+    <a href="/alerts" class="nav-link <%= page==='alerts'?'active':'' %>">🔔 Alerts</a>
+    <a href="/payments" class="nav-link <%= page==='payments'?'active':'' %>">💰 Payments</a>
+  </div>
+  <div class="nav-wallet" id="navWallet">
+    <button class="btn-connect" onclick="connectWallet()">🦊 Connect MetaMask</button>
+  </div>
+</nav>
+<div id="toast" class="toast hidden"></div>

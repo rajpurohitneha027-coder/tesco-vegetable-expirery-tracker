@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supplier Payments — Tesco Vegetable Expiry Tracker</title>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<%- include('partials/navbar', { page: 'payments' }) %>
+<main class="main-content">
+
+  <!-- HEADER -->
+  <div class="pay-hero">
+    <div class="pay-hero-left">
+      <div class="hero-live"><span class="live-dot"></span>LIVE PAYMENTS</div>
+      <h1 class="pay-hero-title">💰 Supplier Payment Ledger</h1>
+      <p class="pay-hero-sub">Every ETH payment automatically sent to suppliers when stock is verified on-chain</p>
+    </div>
+    <div class="pay-hero-right">
+      <div class="pay-summary-card">
+        <div class="psc-val" id="totalPaidEth">—</div>
+        <div class="psc-lbl">Total ETH Paid</div>
+      </div>
+      <div class="pay-summary-card">
+        <div class="psc-val" id="totalSuppliers">—</div>
+        <div class="psc-lbl">Suppliers Paid</div>
+      </div>
+      <div class="pay-summary-card">
+        <div class="psc-val" id="contractBalance">—</div>
+        <div class="psc-lbl">Contract Balance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPLIER BREAKDOWN -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>By Supplier</h2>
+        <p class="section-sub">Total payments grouped per supplier</p>
+      </div>
+    </div>
+    <div id="supplierCards" class="supplier-grid">
+      <div class="loading-state">Loading…</div>
+    </div>
+  </section>
+
+  <!-- PAYMENT HISTORY TABLE -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Payment History</h2>
+        <p class="section-sub">Every on-chain payment transaction</p>
+      </div>
+      <button class="btn-secondary" onclick="loadPayments()">↻ Refresh</button>
+    </div>
+    <div class="table-container">
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Supplier Name</th>
+            <th>Wallet Address</th>
+            <th>Product</th>
+            <th>Amount Paid</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="paymentTableBody">
+          <tr><td colspan="7" class="loading-cell">Loading payments…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+<%- include('partials/footer') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+<script src="/js/web3-utils.js"></script>
+<script src="/js/payments.js"></script>
+</body>
+</html>

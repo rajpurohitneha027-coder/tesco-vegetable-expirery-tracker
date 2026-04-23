@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Product — Tesco Vegetable Expiry Tracker</title>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<%- include('partials/navbar', { page: 'add' }) %>
+
+<main class="main-content">
+  <div class="page-header">
+    <div>
+      <h1>➕ Add Stock Item</h1>
+      <p>Record a new vegetable batch on the Tesco blockchain</p>
+    </div>
+  </div>
+
+  <div class="form-layout">
+    <div class="form-card">
+      <form id="addProductForm">
+
+        <div class="form-section-title">Product Information</div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Tesco Product</label>
+            <select id="productSelect" onchange="onProductSelect(this)">
+              <option value="">— Select product —</option>
+              <option value="Tesco Broccoli 500g|TSC-BRC-001|Brassica">🥦 Tesco Broccoli 500g</option>
+              <option value="Tesco Baby Spinach 200g|TSC-SPN-002|Leafy">🥬 Tesco Baby Spinach 200g</option>
+              <option value="Tesco Carrots 1kg|TSC-CAR-003|Root">🥕 Tesco Carrots 1kg</option>
+              <option value="Tesco Red Peppers|TSC-PEP-004|Fruiting">🫑 Tesco Red Peppers</option>
+              <option value="Tesco Courgettes|TSC-COU-005|Fruiting">🥒 Tesco Courgettes</option>
+              <option value="Tesco Kale 200g|TSC-KAL-006|Leafy">🥬 Tesco Kale 200g</option>
+              <option value="Tesco Leeks|TSC-LEE-007|Allium">🧅 Tesco Leeks</option>
+              <option value="Tesco Cherry Tomatoes|TSC-TOM-008|Fruiting">🍅 Tesco Cherry Tomatoes</option>
+              <option value="Tesco Sweet Potato|TSC-SWP-009|Root">🍠 Tesco Sweet Potato</option>
+              <option value="Tesco Mushrooms 250g|TSC-MSH-010|Fungi">🍄 Tesco Mushrooms 250g</option>
+              <option value="custom||">✏️ Custom Product…</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="category" required>
+              <option value="">— Select —</option>
+              <option value="Brassica">Brassica</option>
+              <option value="Leafy">Leafy</option>
+              <option value="Root">Root</option>
+              <option value="Fruiting">Fruiting</option>
+              <option value="Allium">Allium</option>
+              <option value="Fungi">Fungi</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="customNameGroup" class="form-group hidden">
+          <label>Custom Product Name *</label>
+          <input type="text" id="productName" placeholder="e.g. Tesco Organic Beetroot"/>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>SKU Code *</label>
+            <input type="text" id="sku" placeholder="TSC-XXX-000" required/>
+          </div>
+          <div class="form-group">
+            <label>Supplier / Farm</label>
+            <input type="text" id="supplier" placeholder="e.g. Kent Greens Ltd"/>
+          </div>
+        </div>
+
+        <div class="form-section-title">💰 Supplier Payment</div>
+        <div class="payment-notice">
+          <div class="pn-icon">💸</div>
+          <div>
+            <div class="pn-title">Automatic ETH Payment</div>
+            <div class="pn-desc">When this product is added, the smart contract will automatically send <strong>0.05 ETH</strong> to the supplier's wallet — instantly, trustlessly, on-chain.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Supplier Wallet Address</label>
+          <input type="text" id="supplierWallet" placeholder="0x... paste a Ganache account address" style="font-family:'Space Mono',monospace;font-size:0.82rem;"/>
+          <div class="field-hint">Paste any Ganache account address from MetaMask to receive payment</div>
+        </div>
+
+        <div class="form-section-title">Dates</div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Harvest Date *</label>
+            <input type="date" id="harvestDate" required/>
+          </div>
+          <div class="form-group">
+            <label>Packaging Date *</label>
+            <input type="date" id="packagingDate" required/>
+          </div>
+          <div class="form-group">
+            <label>Expiry / Best Before *</label>
+            <input type="date" id="expiryDate" required/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Batch Number (optional)</label>
+          <input type="text" id="batchNumber" placeholder="e.g. BATCH-2026-001"/>
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn-submit">🔗 Add Product to Blockchain</button>
+      </form>
+    </div>
+
+    <div class="form-sidebar">
+      <div class="sidebar-card sidebar-payment">
+        <div class="sidebar-title">💰 How Payments Work</div>
+        <p>This works like Uber — when Tesco verifies a supplier's batch, the smart contract <strong>automatically releases ETH</strong> to the supplier wallet. No bank. No delay. Instant.</p>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">🔒 Immutable Record</div>
+        <p>Each submission creates a permanent on-chain record that cannot be altered or deleted.</p>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">🦊 MetaMask Signing</div>
+        <p>Connect MetaMask to sign transactions directly from your browser — a confirmation popup will appear.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+<script src="/js/web3-utils.js"></script>
+<script src="/js/add-product.js"></script>
+</body>
+</html>
